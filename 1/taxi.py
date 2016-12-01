@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# Advent of code
+# Day 1 - Part 1
 from enum import Enum
 class Cardinal(Enum):
     north = 'N'
@@ -45,22 +48,17 @@ class Taxi:
                 self.north = self.north - int(distance)
                 self.looking = Cardinal.south;
 
-    def printCoordinates(self):
-        print ("North: ", self.north)
-        print ("East: ", self.east)
+    def getBlocksAway(self):
+        return (abs(self.north) + abs(self.east))
 
-    def printBlocksAway(self):
-        print (abs(self.north) + abs(self.east))
-
+# Read and parse input
 fo = open("input.txt", "r+")
 input = fo.read()
-
 directions = input.replace(" ", "").strip().split(',')
+
+# Let's get started
 taxi = Taxi()
 for direction in directions:
-    print ("Direction ", direction[0])
-    print ("Distance ", direction[1:])
     Taxi.move(taxi, direction[0], direction[1:])
 
-Taxi.printCoordinates(taxi)
-Taxi.printBlocksAway(taxi)
+print ("Solution: ", Taxi.getBlocksAway(taxi))
