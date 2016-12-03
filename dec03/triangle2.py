@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Advent of code
-# Day 3 - Part 1
+# Day 3 - Part 2
 def isTriangle(a, b, c):
     side = [int(a),int(b),int(c)]
     side.sort()
