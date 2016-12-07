@@ -1,5 +1,0 @@
-abba[mnop]qrst
-abcd[bddb]xyyx
-aaaa[qwer]tyui
-ioxxoj[asdfgh]zxcvbn
-abcd[bdda]xyyx[efew]fewfeww[waww]feee
