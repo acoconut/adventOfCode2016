@@ -8,32 +8,33 @@ def parseBracket(content):
     (a, b) = re.findall(".*?(\d+).*?", content)
     return (a, b)
 
-fo = open("inputtest.txt", "r+")
+fo = open("input.txt", "r+")
 inputFile = fo.read()
 input = list(inputFile)
-output = list(input)
+while (' ' in input):
+    input.remove(' ')
+output = list()
+
+treatingBracket = False
+outputIndex = 0 
 
 openBracket = '('
 closeBracket = ')'
+inputIndex = 0
 
-openBrackets = [i for i, x in enumerate(input) if x == openBracket]
-closeBrackets = [i for i, x in enumerate(input) if x == closeBracket]
-print (openBrackets)
-print (closeBrackets)
-
-for bracketIndex in range(len(openBrackets)):
-    print (inputFile[int(openBrackets[bracketIndex]+1):int(closeBrackets[bracketIndex])])
-    (characters, times) = parseBracket(inputFile[int(openBrackets[bracketIndex]+1):int(closeBrackets[bracketIndex])])
-    [output.remove(input[x]) for x in range(openBrackets[bracketIndex], closeBrackets[bracketIndex]+1)]
-    charactersToRepeatIndex = closeBrackets[bracketIndex]+1
-    charactersToRepeat = input[charactersToRepeatIndex:charactersToRepeatIndex+int(characters)]
-    print ("CTR ", charactersToRepeat)
-    # Check if there are any characters that look like markers and remove them
-    cont = 0 
-    while (openBracket in charactersToRepeat):
-        print ("OB ", openBrackets, bracketIndex)
-        charactersToRepeat.remove(openBrackets[bracketIndex+cont])
-        print ("OC ", openBrackets)
-        cont +=1
-    print (charactersToRepeat)
-    #[output.insert(bracketIndex,  
+while (inputIndex < len(input)):
+    if ((input[inputIndex] == openBracket) and (not treatingBracket)):
+        closeBracketIndex = input[inputIndex:].index(closeBracket)+inputIndex
+        (chars, times) = parseBracket(inputFile[inputIndex+1:closeBracketIndex])
+        inputIndex = closeBracketIndex + 1 + int(chars)
+        charsToRepeat = input[closeBracketIndex+1:closeBracketIndex+1+int(chars)]
+        charsToRepeat.reverse()
+        for i in range(int(times)):
+            [output.insert(outputIndex, x) for x in charsToRepeat]
+            outputIndex += int(chars)
+    else:
+        output.append(input[inputIndex])
+        inputIndex += 1
+        outputIndex +=1
+        
+print ("Length ", len(output))
