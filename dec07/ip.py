@@ -43,17 +43,4 @@ for line in input:
     if (goodHypernet and goodSupernet):
         cont +=1
 
-
-#parts = input.replace("[","-").replace("]","-").replace("\n", "-").strip().split('-')
-
-#if (parts[-1] == ''):
-#    parts = parts[:-1]
-    
-#cont = 0
-#print (len(parts))
-#for part in range(0, len(parts), 3):
-#    if (not checkABBA(parts[part+1])):
-#        if (checkABBA(parts[part]) or checkABBA(parts[part+2])):
-#            cont +=1
-#
 print ("Total ", cont)
